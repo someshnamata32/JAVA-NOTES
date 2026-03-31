@@ -10,4 +10,4 @@ Sort an array using Bubble Sort algorithm.
 
 ## ⏱️ Complexity
 - Time: O(n^2)
-- Space: O(1)
+- Space: O(1) 
