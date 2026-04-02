@@ -1,43 +1,47 @@
-class QuickSort {
+import java.util.*;
 
-    int partition(int arr[], int low, int high) {
-        int pivot = arr[high];  // last element pivot
-        int i = low - 1;
+public class Main {
 
-        for(int j = low; j < high; j++) {
-            if(arr[j] < pivot) {
-                i++;
-                // swap
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+    public static int partition(int[] arr, int st, int end) {
+        int pivot = arr[end];
+        int idx = st - 1;
+
+        for (int j = st; j < end; j++) {
+            if (arr[j] <= pivot) {
+                idx++;
+                
+                // swap arr[j] and arr[idx]
+                int temp = arr[j];
+                arr[j] = arr[idx];
+                arr[idx] = temp;
             }
         }
 
-        // place pivot at correct position
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
+        idx++;
+        
+        // swap pivot to correct position
+        int temp = arr[end];
+        arr[end] = arr[idx];
+        arr[idx] = temp;
 
-        return i + 1;
+        return idx;
     }
 
-    void quickSort(int arr[], int low, int high) {
-        if(low < high) {
-            int pi = partition(arr, low, high);
+    public static void quickSort(int[] arr, int st, int end) {
+        if (st < end) {
+            int pivIdx = partition(arr, st, end);
 
-            quickSort(arr, low, pi - 1);  // left
-            quickSort(arr, pi + 1, high); // right
+            quickSort(arr, st, pivIdx - 1);   // left half
+            quickSort(arr, pivIdx + 1, end); // right half
         }
     }
 
     public static void main(String[] args) {
-        int arr[] = {10, 7, 8, 9, 1, 5};
+        int[] arr = {5, 2, 6, 4, 1, 3};
 
-        QuickSort obj = new QuickSort();
-        obj.quickSort(arr, 0, arr.length - 1);
+        quickSort(arr, 0, arr.length - 1);
 
-        for(int val : arr) {
+        for (int val : arr) {
             System.out.print(val + " ");
         }
     }
